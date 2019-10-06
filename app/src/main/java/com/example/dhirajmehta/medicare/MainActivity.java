@@ -10,20 +10,22 @@ import android.view.MenuItem;
 //import android.view.View;
 //import android.widget.CheckBox;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 //import android.widget.Toast;
 //
 //import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HomeFragment.SendMessage {
 
     private TextView mTextMessage;
-//    CheckBox cold, cough, fever, headache, giddyness, stomachache;
+    //    CheckBox cold, cough, fever, headache, giddyness, stomachache;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-           Fragment fragment;
+            Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     fragment = new HomeFragment();
@@ -59,6 +61,16 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void sendSymptoms(String message, ArrayList<String> diseaseList) {
+        DashFragment dashFragment = new DashFragment();
+        Bundle args = new Bundle();
+        args.putString("Symptoms", message);
+        args.putStringArrayList("ListSymptoms",diseaseList);
+        dashFragment.setArguments(args);
+        loadFragment(dashFragment);
     }
 
 //    void submitSymptoms(View view){

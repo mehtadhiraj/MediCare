@@ -1,9 +1,12 @@
 package com.example.dhirajmehta.medicare;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class HomeFragment  extends Fragment {
+
+    SendMessage SM;
 
     Button submit;
     View rootview;
@@ -72,16 +77,33 @@ public class HomeFragment  extends Fragment {
         if(symptoms == ""){
             symptoms = "No item selceted";
         }else{
-            DashFragment fragment = new DashFragment();
-            Bundle symptomsBundle = new Bundle();
-            symptomsBundle.putString("symptoms", symptoms);
-            fragment.setArguments(symptomsBundle);
+            Log.d("HOME Fragment",symptoms);
+//            DashFragment fragment = new DashFragment();
+//            Bundle symptomsBundle = new Bundle();
+//            symptomsBundle.putString("symptoms", symptoms);
+//            fragment.setArguments(symptomsBundle);
+
+            SM.sendSymptoms(symptoms,diseasesList);
             //Inflate the fragment
-            getFragmentManager().beginTransaction().add(R.id.diseasesView, fragment).commit();
+//            getFragmentManager().beginTransaction().add(R.id.diseasesView, fragment).commit();
         }
         Toast.makeText(getContext(), symptoms, Toast.LENGTH_SHORT).show();
 
 
+    }
+    interface SendMessage {
+        void sendSymptoms(String message, ArrayList<String> diseasesList);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            SM = (SendMessage) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Error in retrieving data. Please try again");
+        }
     }
 
 }
