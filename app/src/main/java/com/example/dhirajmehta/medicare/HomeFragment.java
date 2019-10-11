@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,7 +89,14 @@ public class HomeFragment  extends Fragment {
 //            getFragmentManager().beginTransaction().add(R.id.diseasesView, fragment).commit();
         }
         Toast.makeText(getContext(), symptoms, Toast.LENGTH_SHORT).show();
-
+        Fragment fragment= new DashFragment();
+        Bundle args = new Bundle();
+        args.putString("Symptoms", symptoms);
+        fragment.setArguments(args);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+        transaction.addToBackStack(null);  // this will manage backstack
+        transaction.commit();
 
     }
     interface SendMessage {
