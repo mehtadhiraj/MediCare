@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HERE-sdk/HERE-sdk.iml" filepath="$PROJECT_DIR$/HERE-sdk/HERE-sdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MediCareNew.iml" filepath="$PROJECT_DIR$/MediCareNew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MediCare.iml" filepath="$PROJECT_DIR$/MediCare.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

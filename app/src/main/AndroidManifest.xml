@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:uses-permissionandroid="http://schemas.android.com/apk/distribution"
     package="com.example.dhirajmehta.medicare">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
     <application
@@ -15,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.here.android.maps.appid" android:value="ezyVkoOpwngZWt8unaQb"/>
+        <meta-data android:name="com.here.android.maps.apptoken" android:value="e592_9GhCTSUSK5gv64IZQ"/>
+
+
         <activity android:name=".MapActivity"></activity>
         <activity
             android:name=".MainActivity"
@@ -25,9 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <meta-data android:name="com.here.android.maps.appid" android:value="ezyVkoOpwngZWt8unaQb"/>-->
-<!--        <meta-data android:name="com.here.android.maps.apptoken" android:value="e592_9GhCTSUSK5gv64IZQ"/>-->
-
     </application>
 
 </manifest>
