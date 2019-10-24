@@ -29,14 +29,23 @@ public class MapActivity extends AppCompatActivity {
     private static MapRoute mapRoute1;
     private String locationAddress = "";
     private Double latitude  = 19.0363;
-    private Double langitude = 73.0154;
+    private Double longitude = 73.0154;
     private static View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        mapFragment = (AndroidXMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapfragment);
+        GPSTracker gpsTracker = new GPSTracker(this);
+
+        if (gpsTracker.getIsGPSTrackingEnabled())
+        {
+            latitude = gpsTracker.getLatitude();
+            longitude = gpsTracker.getLongitude();
+        }
+
+
+            mapFragment = (AndroidXMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapfragment);
 //        mapFragment.getMapAsync(this);
         mapFragment.init(new OnEngineInitListener() {
             @Override
@@ -45,7 +54,7 @@ public class MapActivity extends AppCompatActivity {
                     map = null;
                     map = mapFragment.getMap();
                     // Set the map center to the Vancouver region (no animation)
-                    map.setCenter(new GeoCoordinate(latitude, langitude, 0.0),
+                    map.setCenter(new GeoCoordinate(latitude, longitude, 0.0),
                             Map.Animation.NONE);
                     map.setZoomLevel((map.getMaxZoomLevel() + map.getMinZoomLevel()) / 2);
                     map.getPositionIndicator().setVisible(true);
@@ -55,7 +64,7 @@ public class MapActivity extends AppCompatActivity {
 //                        map.addMapObject(defaultMarker);
                         Image image = new Image();
                         image.setImageResource(R.drawable.mmarker);
-                        MapMarker customMarker = new MapMarker(new GeoCoordinate(19.0363, 73.0154, 0.0), image);
+                        MapMarker customMarker = new MapMarker(new GeoCoordinate(latitude, longitude, 0.0), image);
                         map.addMapObject(customMarker);
 
                     } catch (IOException e) {
